@@ -14,10 +14,10 @@ function App() {
             <ShieldLock className="w-16 h-16 text-indigo-600" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Secure File Storage
+            Secure health record
           </h1>
           <p className="text-lg text-gray-600">
-            Upload and store your files securely with end-to-end encryption
+            Upload and store your health record securely with end-to-end encryption
           </p>
         </div>
 

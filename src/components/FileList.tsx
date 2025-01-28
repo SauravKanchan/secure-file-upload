@@ -115,7 +115,7 @@ export function FileList() {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">Your Files</h2>
+      <h2 className="text-xl font-semibold mb-4">Your health records</h2>
       {files.length === 0 ? (
         <p className="text-gray-500 text-center">No files uploaded yet</p>
       ) : (
