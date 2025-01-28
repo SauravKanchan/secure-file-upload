@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabase } from './lib/supabase'; // Ensure you have Supabase client setup
 import { FileUpload } from './components/FileUpload';
 import { FileList } from './components/FileList';
 import { KeyGeneration } from './components/KeyGeneration';
@@ -6,6 +7,24 @@ import { Authentication } from './components/Authentication';
 import { Shield as ShieldLock } from 'lucide-react';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsAuthenticated(!!user?.id);
+    };
+    checkUser();
+  }, []);
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <Authentication />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -22,10 +41,7 @@ function App() {
         </div>
 
         <div className="space-y-12">
-          <Authentication />
-
           <KeyGeneration />
-          
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <FileUpload />
