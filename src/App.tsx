@@ -8,14 +8,27 @@ import { Shield as ShieldLock } from 'lucide-react';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       setIsAuthenticated(!!user?.id);
+      setIsLoading(false);
     };
     checkUser();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="loader border-t-4 border-b-4 border-indigo-600 rounded-full w-12 h-12 animate-spin mx-auto mb-4"></div>
+          <p className="text-lg text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
